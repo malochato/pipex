@@ -1,0 +1,6 @@
+ce qu'il faut faire. 
+on peut supprimer la structure pipeline 
+et a la place assigner le input au premier node, 
+et ensuite le out_pout au dernier node. 
+
+faire une fonction pour faire cela. 
