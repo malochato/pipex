@@ -6,7 +6,7 @@
 /*   By: malde-ch <malo@chato.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 23:58:07 by malde-ch          #+#    #+#             */
-/*   Updated: 2024/11/16 21:53:14 by malde-ch         ###   ########.fr       */
+/*   Updated: 2024/11/16 21:49:22 by malde-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	ft_cmd_clear(t_cmd_node **lst)
 	*lst = NULL;
 }
 
-t_cmd_node *create_and_add_command(int argc, char **argv, char **envp, int )
+t_cmd_node *create_and_add_command(int argc, char **argv, char **envp)
 {
 	t_cmd_node *head;
 	t_cmd_node *node;
