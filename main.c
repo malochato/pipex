@@ -28,7 +28,6 @@ int	main(int argc, char **argv, char **envp)
 	create_pipeline(&pipeline);
 	close(pipeline.input_fd);
 	close(pipeline.output_fd);
-	//while (wait(NULL) > 0);
 	ft_cmd_clear(&head);
 	return (0);
 }

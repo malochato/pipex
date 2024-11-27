@@ -15,15 +15,14 @@
 void	error_exit(const char *message, int infile, int outfile)
 {
 	perror(message);
-	if (infile >= 0) 
+	if (infile >= 0)
 		close(infile);
-	if (outfile >= 0) 
+	if (outfile >= 0)
 		close(outfile);
 	exit(EXIT_FAILURE);
 }
 
-
-void	open_file(const char *file_in, const char *file_out, t_pipeline *pipeline )
+void	open_file(char *file_in, char *file_out, t_pipeline *pipeline )
 {
 	pipeline->input_fd = open(file_in, O_RDONLY, 0);
 	if (pipeline->input_fd < 0)

@@ -26,7 +26,6 @@ char	**get_command(char *cmd, char **envp)
 	return (command);
 }
 
-
 t_cmd_node	*ft_newcommand(char *cmd, char **envp)
 {
 	t_cmd_node	*new_lst;
@@ -49,7 +48,6 @@ t_cmd_node	*ft_newcommand(char *cmd, char **envp)
 	return (new_lst);
 }
 
-
 t_cmd_node	*ft_command_add_back(t_cmd_node **lst, t_cmd_node *new)
 {
 	t_cmd_node	*last;
@@ -66,7 +64,6 @@ t_cmd_node	*ft_command_add_back(t_cmd_node **lst, t_cmd_node *new)
 	return (*lst);
 }
 
-
 void	ft_cmd_clear(t_cmd_node **lst)
 {
 	t_cmd_node	*current;
@@ -75,7 +72,6 @@ void	ft_cmd_clear(t_cmd_node **lst)
 
 	if (!lst || !*lst)
 		return ;
-
 	current = *lst;
 	while (current)
 	{
@@ -83,7 +79,7 @@ void	ft_cmd_clear(t_cmd_node **lst)
 		i = 0;
 		while (current->command[i])
 		{
-			printf("command: %s\n", current->command[i]);
+			ft_printf("command: %s\n", current->command[i]);
 			free(current->command[i]);
 			i++;
 		}
