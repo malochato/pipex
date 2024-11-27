@@ -22,6 +22,11 @@ int	main(int argc, char **argv, char **envp)
 		ft_printf("Usage: ./pipex file1 cmd1 [cmd2 ... cmdN] file2\n");
 		exit(EXIT_FAILURE);
 	}
+	if (ft_strncmp(argv[1], "here_doc", 8) == 0 && ft_strlen(argv[1]) == 8)
+	{
+		ft_printf("here_doc");
+		return (0);
+	}
 	head = create_and_add_command(argc, argv, envp);
 	pipeline.head = head;
 	open_file(argv[1], argv[argc - 1], &pipeline);

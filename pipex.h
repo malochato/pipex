@@ -40,6 +40,7 @@ typedef struct s_pipeline
 
 void		error_exit(const char *message, int infile, int outfile);
 void		open_file(char *file_in, char *file_out, t_pipeline *pipeline );
+void		ft_free_split(char **split);
 
 void		create_pipeline(t_pipeline *pipeline);
 

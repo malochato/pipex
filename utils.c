@@ -31,3 +31,17 @@ void	open_file(char *file_in, char *file_out, t_pipeline *pipeline )
 	if (pipeline->output_fd < 0)
 		error_exit(file_out, pipeline->input_fd, -1);
 }
+
+void	ft_free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		ft_printf("command: %s\n", split[i]);
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}

@@ -18,9 +18,13 @@ char	**get_command(char *cmd, char **envp)
 	char	*absolute_path;
 
 	command = ft_split(cmd, ' ');
+	//if (command[0] == )
 	absolute_path = get_absolute_path(envp, command[0]);
 	if (!absolute_path)
+	{
+		ft_free_split(command);
 		return (NULL);
+	}
 	free(command[0]);
 	command[0] = absolute_path;
 	return (command);
@@ -68,7 +72,6 @@ void	ft_cmd_clear(t_cmd_node **lst)
 {
 	t_cmd_node	*current;
 	t_cmd_node	*next;
-	int			i;
 
 	if (!lst || !*lst)
 		return ;
@@ -76,14 +79,7 @@ void	ft_cmd_clear(t_cmd_node **lst)
 	while (current)
 	{
 		next = current->next;
-		i = 0;
-		while (current->command[i])
-		{
-			ft_printf("command: %s\n", current->command[i]);
-			free(current->command[i]);
-			i++;
-		}
-		free(current->command);
+		ft_free_split(current->command);
 		free(current);
 		current = next;
 	}
@@ -104,7 +100,7 @@ t_cmd_node	*create_and_add_command(int argc, char **argv, char **envp)
 		if (!node)
 		{
 			ft_cmd_clear(&head);
-			error_exit("Error malloc", -1, -1);
+			error_exit("Your command", -1, -1);
 		}
 		ft_command_add_back(&head, node);
 		i++;

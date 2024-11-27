@@ -1,7 +1,2 @@
-drwxr-xr-x 3 malde-ch 2024_barcelona      65 Nov 27 12:00 ..
-drwxr-xr-x 9 malde-ch 2024_barcelona     178 Nov 27 12:00 .git
-drwxr-xr-x 4 malde-ch 2024_barcelona     318 Nov 27 13:48 .
--rw-r--r-- 1 malde-ch 2024_barcelona     192 Nov 27 12:00 to_do.txt
--rwxr-xr-x 1 malde-ch 2024_barcelona 1320152 Nov 27 13:48 pipex
--rw-r--r-- 1 malde-ch 2024_barcelona    1774 Nov 27 13:48 pipex.h
-drwxr-xr-x 3 malde-ch 2024_barcelona    4096 Nov 27 13:48 libft
+pipex.h
+pipex
