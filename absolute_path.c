@@ -1,6 +1,15 @@
-/* #include <unistd.h>
-#include <stdio.h>
-#include <string.h> */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   absolute_path.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: malde-ch <malo@chato.fr>                   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/26 19:25:57 by malde-ch          #+#    #+#             */
+/*   Updated: 2024/11/26 19:26:24 by malde-ch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 void	free_tab(char **tab)
@@ -18,7 +27,7 @@ void	free_tab(char **tab)
 
 char	**get_path_dirs(char **envp)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (envp[i])
@@ -30,11 +39,11 @@ char	**get_path_dirs(char **envp)
 	return (NULL);
 }
 
-char *find_command(char **path, char *cmd)
+char	*find_command(char **path, char *cmd)
 {
-	char *absolute_path;
-	char *tmp;
-	int i;
+	char	*absolute_path;
+	char	*tmp;
+	int		i;
 
 	i = 0;
 	absolute_path = NULL;
@@ -52,7 +61,7 @@ char *find_command(char **path, char *cmd)
 	return (NULL);
 }
 
-char *get_absolute_path(char **envp, char *cmd)
+char	*get_absolute_path(char **envp, char *cmd)
 {
 	char	**path;
 	char	*absolute_path;

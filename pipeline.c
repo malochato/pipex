@@ -6,7 +6,7 @@
 /*   By: malde-ch <malo@chato.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 20:46:01 by malde-ch          #+#    #+#             */
-/*   Updated: 2024/11/16 21:41:48 by malde-ch         ###   ########.fr       */
+/*   Updated: 2024/11/26 20:01:34 by malde-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,6 @@ static void	execute_command(t_cmd_node *node)
 	error_exit("execve", -1, -1);
 }
 
-static void	setup_and_execute_command(t_cmd_node *current, int *input_fd, int output_fd, int pipefd[2])
-{
-	current->input_fd = *input_fd;
-	current->output_fd = output_fd;
-	if (current->next != NULL) 
-	{
-		current->pipefd[0] = pipefd[0];
-		current->pipefd[1] = pipefd[1];
-	}
-	execute_command(current);
-}
-
 static void	update_input_fd(int *input_fd, int pipefd[2], t_cmd_node *current)
 {
 	if (*input_fd != -1)
@@ -57,10 +45,10 @@ static void	update_input_fd(int *input_fd, int pipefd[2], t_cmd_node *current)
 	}
 }
 
-static void	handle_command_node(t_cmd_node *current, int *input_fd, int output_fd)
+void	handle_command_node(t_cmd_node *current, int *input_fd, int output_fd)
 {
-	int pipefd[2];
-	pid_t pid;
+	int		pipefd[2];
+	pid_t	pid;
 
 	if (current->next != NULL && pipe(pipefd) == -1)
 		error_exit("pipe", *input_fd, output_fd);
@@ -69,25 +57,33 @@ static void	handle_command_node(t_cmd_node *current, int *input_fd, int output_f
 		error_exit("fork", *input_fd, output_fd);
 	if (pid == 0) 
 	{
-		setup_and_execute_command(current, input_fd, output_fd, pipefd);
+		if (current->next != NULL)
+		{
+			current->pipefd[0] = pipefd[0];
+			current->pipefd[1] = pipefd[1];
+		}
+		execute_command(current);
 	}
-	else 
+	else
 	{
 		update_input_fd(input_fd, pipefd, current);
+		wait(&pid);
 	}
 }
 
 void	create_pipeline(t_pipeline *pipeline)
 {
-	t_cmd_node *current;
-	int input_fd;
-	int output_fd;
+	t_cmd_node	*current;
+	int			input_fd;
+	int			output_fd;
 
 	current = pipeline->head;
 	input_fd = pipeline->input_fd;
 	output_fd = pipeline->output_fd;
 	while (current != NULL) 
 	{
+		current->input_fd = input_fd;
+		current->output_fd = output_fd;
 		handle_command_node(current, &input_fd, output_fd);
 		current = current->next;
 	}
