@@ -10,7 +10,8 @@ SRC =	absolute_path.c \
 		main.c
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address 
+FLAGS = -Wall -Wextra -Werror
+# -g -fsanitize=address 
 RM = rm -f
 OBJ = $(SRC:.c=.o)
 INCLUDE = pipex.h 

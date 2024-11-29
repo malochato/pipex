@@ -6,7 +6,7 @@
 /*   By: malde-ch <malo@chato.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 20:39:12 by malde-ch          #+#    #+#             */
-/*   Updated: 2024/11/16 16:37:53 by malde-ch         ###   ########.fr       */
+/*   Updated: 2024/11/30 04:54:36 by malde-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-typedef struct s_command_node
+typedef struct s_cmd_node
 {
-	char					**command;
-	char					**envp;
-	int						input_fd;
-	int						output_fd;
-	int						pipefd[2];
-	struct s_command_node	*next;
+	char				**command;
+	char				**envp;
+	int					input_fd;
+	int					output_fd;
+	int					pipefd[2];
+	struct s_cmd_node	*next;
 }	t_cmd_node;
 
 typedef struct s_pipeline
@@ -38,7 +38,7 @@ typedef struct s_pipeline
 	t_cmd_node	*head;
 }	t_pipeline;
 
-void		error_exit(const char *message, int infile, int outfile);
+void		error_exit(const char *message, t_pipeline *pipeline);
 void		open_file(char *file_in, char *file_out, t_pipeline *pipeline );
 void		ft_free_split(char **split);
 

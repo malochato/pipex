@@ -6,7 +6,7 @@
 /*   By: malde-ch <malo@chato.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 19:41:09 by malde-ch          #+#    #+#             */
-/*   Updated: 2024/11/26 19:39:42 by malde-ch         ###   ########.fr       */
+/*   Updated: 2024/11/30 04:58:13 by malde-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,17 @@ int	main(int argc, char **argv, char **envp)
 		return (0);
 	}
 	head = create_and_add_command(argc, argv, envp);
+	if (!head)
+	{
+		ft_printf("Error: command not found\n");
+		exit(EXIT_FAILURE);
+	}
 	pipeline.head = head;
 	open_file(argv[1], argv[argc - 1], &pipeline);
 	create_pipeline(&pipeline);
 	close(pipeline.input_fd);
 	close(pipeline.output_fd);
 	ft_cmd_clear(&head);
+	//while (1);
 	return (0);
 }

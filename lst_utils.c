@@ -6,7 +6,7 @@
 /*   By: malde-ch <malo@chato.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 23:58:07 by malde-ch          #+#    #+#             */
-/*   Updated: 2024/11/26 19:28:04 by malde-ch         ###   ########.fr       */
+/*   Updated: 2024/11/30 04:58:41 by malde-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,22 +68,25 @@ t_cmd_node	*ft_command_add_back(t_cmd_node **lst, t_cmd_node *new)
 	return (*lst);
 }
 
-void	ft_cmd_clear(t_cmd_node **lst)
+void	ft_cmd_clear(t_cmd_node **cmd_list)
 {
-	t_cmd_node	*current;
-	t_cmd_node	*next;
+	t_cmd_node	*current_node;
+	t_cmd_node	*next_node;
 
-	if (!lst || !*lst)
+	if (!cmd_list || !*cmd_list)
 		return ;
-	current = *lst;
-	while (current)
+
+	current_node = *cmd_list;
+	while (current_node)
 	{
-		next = current->next;
-		ft_free_split(current->command);
-		free(current);
-		current = next;
+		next_node = current_node->next;
+		if (current_node->command)
+			ft_free_split(current_node->command);
+		free(current_node);
+		current_node = next_node;
 	}
-	*lst = NULL;
+
+	*cmd_list = NULL;
 }
 
 t_cmd_node	*create_and_add_command(int argc, char **argv, char **envp)
@@ -100,7 +103,7 @@ t_cmd_node	*create_and_add_command(int argc, char **argv, char **envp)
 		if (!node)
 		{
 			ft_cmd_clear(&head);
-			error_exit("Your command", -1, -1);
+			return (NULL);	
 		}
 		ft_command_add_back(&head, node);
 		i++;
