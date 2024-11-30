@@ -6,7 +6,7 @@
 /*   By: malde-ch <malo@chato.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 20:39:12 by malde-ch          #+#    #+#             */
-/*   Updated: 2024/11/30 04:54:36 by malde-ch         ###   ########.fr       */
+/*   Updated: 2024/11/30 08:26:50 by malde-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,12 @@ t_cmd_node	*ft_newcommand(char *cmd, char **envp);
 t_cmd_node	*ft_command_add_back(t_cmd_node **lst, t_cmd_node *new);
 void		ft_cmd_clear(t_cmd_node **lst);
 t_cmd_node	*create_and_add_command(int argc, char **argv, char **envp);
+
+void		handle_here_doc(char *delimiter);
+
+
+void		remove_file(const char *filename);
+
+
 
 #endif

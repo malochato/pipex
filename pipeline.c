@@ -6,7 +6,7 @@
 /*   By: malde-ch <malo@chato.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 20:46:01 by malde-ch          #+#    #+#             */
-/*   Updated: 2024/11/30 06:22:49 by malde-ch         ###   ########.fr       */
+/*   Updated: 2024/11/30 08:22:20 by malde-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 static char	*execute_command(t_cmd_node *node)
 {
-	ft_printf("command: %s\n", node->command[0]);
-	ft_printf("command: %s\n", node->command[1]);
-
-	
 	if (dup2(node->input_fd, STDIN_FILENO) == -1)
 		return ("dup2 input");
 	close(node->input_fd);
@@ -89,4 +85,6 @@ void	create_pipeline(t_pipeline *pipeline)
 			error_exit(error, pipeline);
 		current = current->next;
 	}
+	close(pipeline->output_fd);
+	close(pipeline->input_fd);
 }

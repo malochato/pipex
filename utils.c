@@ -6,7 +6,7 @@
 /*   By: malde-ch <malo@chato.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 20:48:10 by malde-ch          #+#    #+#             */
-/*   Updated: 2024/11/30 06:17:08 by malde-ch         ###   ########.fr       */
+/*   Updated: 2024/11/30 08:23:46 by malde-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,37 @@
 void	error_exit(const char *message, t_pipeline *pipeline)
 {
 	perror(message);
-	ft_cmd_clear(&pipeline->head);
+	if (pipeline)
+		ft_cmd_clear(&pipeline->head);
 	exit(EXIT_FAILURE);
 }
 
-void	open_file(char *file_in, char *file_out, t_pipeline *pipeline )
+void	open_input_file(char *file, t_pipeline *pipeline)
 {
-	pipeline->input_fd = open(file_in, O_RDONLY, 0);
+	pipeline->input_fd = open(file, O_RDONLY, 0);
 	if (pipeline->input_fd < 0)
-		error_exit(file_in, pipeline);
-	pipeline->output_fd = open(file_out, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		error_exit(file, pipeline);
+}
+
+void	open_output_file(char *file, int flags, t_pipeline *pipeline)
+{
+	pipeline->output_fd = open(file, flags, 0644);
 	if (pipeline->output_fd < 0)
-		error_exit(file_out, pipeline);
+		error_exit(file, pipeline);
+}
+
+void	open_file(char *file_in, char *file_out, t_pipeline *pipeline)
+{
+	if (ft_strncmp(file_in, "here_doc", 8) == 0 && ft_strlen(file_in) == 8)
+	{
+		open_input_file(".here_doc_tmp", pipeline);
+		open_output_file(file_out, O_WRONLY | O_CREAT | O_APPEND, pipeline);
+	}
+	else
+	{
+		open_input_file(file_in, pipeline);
+		open_output_file(file_out, O_WRONLY | O_CREAT | O_TRUNC, pipeline);
+	}
 }
 
 void	ft_free_split(char **split)
@@ -36,7 +55,6 @@ void	ft_free_split(char **split)
 	i = 0;
 	while (split[i])
 	{
-		//ft_printf("command: %s\n", split[i]);
 		free(split[i]);
 		i++;
 	}

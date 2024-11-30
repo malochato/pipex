@@ -3,7 +3,8 @@ LIBFT = libft.a
 
 LIBFT_PATH = ./libft/
 
-SRC =	absolute_path.c \
+SRC =	here_doc.c \
+		absolute_path.c \
 		lst_utils.c \
 		utils.c \
 		pipeline.c \

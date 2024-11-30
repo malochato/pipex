@@ -6,7 +6,7 @@
 /*   By: malde-ch <malo@chato.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 23:58:07 by malde-ch          #+#    #+#             */
-/*   Updated: 2024/11/30 04:58:41 by malde-ch         ###   ########.fr       */
+/*   Updated: 2024/11/30 08:30:51 by malde-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char	**get_command(char *cmd, char **envp)
 	char	*absolute_path;
 
 	command = ft_split(cmd, ' ');
-	//if (command[0] == )
 	absolute_path = get_absolute_path(envp, command[0]);
 	if (!absolute_path)
 	{
@@ -97,6 +96,11 @@ t_cmd_node	*create_and_add_command(int argc, char **argv, char **envp)
 
 	i = 2;
 	head = NULL;
+	if (ft_strncmp(argv[1], "here_doc", 8) == 0 && ft_strlen(argv[1]) == 8)
+	{
+		handle_here_doc(argv[2]);
+		i = 3;
+	}
 	while (i < argc - 1)
 	{
 		node = ft_newcommand(argv[i], envp);
