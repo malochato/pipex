@@ -6,7 +6,7 @@
 /*   By: malde-ch <malo@chato.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 20:48:10 by malde-ch          #+#    #+#             */
-/*   Updated: 2024/11/30 08:23:46 by malde-ch         ###   ########.fr       */
+/*   Updated: 2024/11/30 23:25:10 by malde-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 
 void	error_exit(const char *message, t_pipeline *pipeline)
 {
+	printf("acess = %d\n", access(".here_doc_tmp", F_OK));
 	perror(message);
+	if (access(".here_doc_tmp", F_OK) == 0)
+	{
+		printf("Error: here_doc\n");
+		remove_file(".here_doc_tmp");
+	}
 	if (pipeline)
 		ft_cmd_clear(&pipeline->head);
 	exit(EXIT_FAILURE);

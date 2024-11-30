@@ -6,7 +6,7 @@
 /*   By: malde-ch <malo@chato.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 20:39:12 by malde-ch          #+#    #+#             */
-/*   Updated: 2024/11/30 08:26:50 by malde-ch         ###   ########.fr       */
+/*   Updated: 2024/11/30 23:29:59 by malde-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_pipeline
 void		error_exit(const char *message, t_pipeline *pipeline);
 void		open_file(char *file_in, char *file_out, t_pipeline *pipeline );
 void		ft_free_split(char **split);
+void		remove_file(const char *filename);
 
 void		create_pipeline(t_pipeline *pipeline);
 
@@ -52,10 +53,5 @@ void		ft_cmd_clear(t_cmd_node **lst);
 t_cmd_node	*create_and_add_command(int argc, char **argv, char **envp);
 
 void		handle_here_doc(char *delimiter);
-
-
-void		remove_file(const char *filename);
-
-
 
 #endif

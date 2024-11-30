@@ -6,7 +6,7 @@
 /*   By: malde-ch <malo@chato.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:45:20 by malde-ch          #+#    #+#             */
-/*   Updated: 2024/11/30 08:26:27 by malde-ch         ###   ########.fr       */
+/*   Updated: 2024/11/30 23:30:33 by malde-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	handle_here_doc(char *delimiter)
 	while (1)
 	{
 		ft_printf("heredoc> ");
-		line = get_next_line(0);
+		line = get_next_line(STDIN_FILENO);
 		if (!line || (ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0 \
-					&& ft_strlen(line) -1 == ft_strlen(delimiter)))
+					&& ft_strlen(line) - 1 == ft_strlen(delimiter)))
 		{
 			free(line);
 			break ;
@@ -37,7 +37,7 @@ void	handle_here_doc(char *delimiter)
 	close(fd);
 }
 
-void remove_file(const char *filename)
+void	remove_file(const char *filename)
 {
 	if (unlink(filename) == -1)
 		error_exit("Error removing temporary file", NULL);
